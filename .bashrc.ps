@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#
+DIR_ThisScript="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+
+#
+FILE_BASH_PS=${HOME}/.bashrc.ps
+if [ ! -e "${FILE_BASH_PS}" ] ; then
+    cp -p ${DIR_ThisScript}/.bashrc.ps ${FILE_BASH_PS}
+fi
+
+#
+FILE_DIR_COLORS=${HOME}/.dircolors
+if [ ! -e "${FILE_DIR_COLORS}" ] ; then
+    cp -p ${DIR_ThisScript}/.dircolors ${FILE_DIR_COLORS}
+fi
+
+#
+source ${HOME}/.bashrc.git
+
+# [change color] blue'34' --> cyan'36'
+## prompt
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w$(__git_ps1) \$\[\033[00m\] '
+## ls
+eval `dircolors .dircolors`
+alias ls='ls --color=auto'
+
+
+#

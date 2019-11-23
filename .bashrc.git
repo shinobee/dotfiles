@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#
+DIR_ThisScript="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+
+#
+FILE_GIT_COMPLETION=${HOME}/.git-completion.bash
+if [ ! -e "${FILE_GIT_COMPLETION}" ] ; then
+    curl -o ${FILE_GIT_COMPLETION} https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+fi
+source ${FILE_GIT_COMPLETION}
+
+#
+FILE_GIT_PROMPT=${HOME}/.git-prompt.sh
+if [ ! -e "${FILE_GIT_PROMPT}" ] ; then
+    curl -o ${FILE_GIT_PROMPT} https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+fi
+source ${FILE_GIT_PROMPT}
+
+#
+FILE_BASH_GIT=${HOME}/.bashrc.git
+if [ ! -e "${FILE_BASH_GIT}" ] ; then
+    cp -pi ${DIR_ThisScript}/.bashrc.git ${FILE_BASH_GIT}
+fi
+
+#
